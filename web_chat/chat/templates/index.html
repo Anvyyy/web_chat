@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+{% block content %}
+<p>Главная</p>
+{% csrf_token %}
+{% if request.user.is_authenticated %}
+
+    <h3>Добро пожаловать на сайт {{ request.user.username }}</h3>
+    <form method="get">
+    <label class="visually-hidden">Nickname</label>
+        {{ form.query }}
+        <button class="w-100 btn btn-lg btn-primary" type="submit" id="go">Поиск</button>
+    </form>
+{% else %}
+    <h3>Вы не авторизованы</h3>
+    <a href="{% url 'auth' %}">Войти</a>
+{% endif %}
+
+{% endblock %}
